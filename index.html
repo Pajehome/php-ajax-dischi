@@ -13,8 +13,13 @@
 <body>
     <div id="app">
         <header>
-            <nav class="row g-0 align-items-center">
+            <nav class="row g-0 align-items-center justify-content-around">
                 <img class="spoty" src="img/spotify.png" alt="">
+
+                <select class="w-25" name="categories" id="categorie" @change="search()" v-model="selectedCategory">
+                    <option value="">All</option>
+                    <option :value="cat" v-for="(cat, index) in categories" :key="index">{{cat}}</option>
+                </select>
             </nav>
          </header>
         

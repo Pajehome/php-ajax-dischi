@@ -2,14 +2,33 @@ const app = new Vue({
     el: '#app',
     data: {
       dischi:[],
+      categories:[],
+      selectedCategory: '',
+      apiPath: './server.php'
     },
     methods: {
-     getData(){
-         axios.get('server.php').then((response) =>{
+     getData(category = null){
+         let path = this.apiPath;
+         if(category){
+             path = `${this.apiPath}?category=${category}`;
+         }
+         axios.get(path).then((response) =>{
             this.dischi = response.data;
-            console.log(this.dischi)
+            if(this.categories.length < 1){
+                this.dischi.forEach((disco) =>{
+                    if(!this.categories.includes(disco.genre)){
+                        this.categories.push(disco.genre);
+                    }
+                })
+            }
          })
+     },
+
+     search(){
+      this.getData(this.selectedCategory)
      }
+
+
     },
     mounted(){
     this.getData()
