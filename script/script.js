@@ -14,13 +14,11 @@ const app = new Vue({
          }
          axios.get(path).then((response) =>{
             this.dischi = response.data;
-            if(this.categories.length < 1){
                 this.dischi.forEach((disco) =>{
                     if(!this.categories.includes(disco.genre)){
                         this.categories.push(disco.genre);
                     }
-                })
-            }
+                })  
          })
      },
 
